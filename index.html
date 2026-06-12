@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEC_NODE // SAKTHIVEL P</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+        :root {
+            --bg-dark: #030712;
+            --panel-bg: rgba(10, 15, 30, 0.75);
+            --neon-red: #ef4444;
+            --neon-cyan: #06b6d4;
+            --neon-green: #10b981;
+            --text-bright: #f9fafb;
+            --text-dim: #9ca3af;
+            --border-cyber: rgba(6, 182, 212, 0.3);
+            --border-glow: rgba(6, 182, 212, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-bright);
+            line-height: 1.5;
+            position: relative;
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding: 24px;
+        }
+
+        /* Animated High-Tech Digital Circuit & Lock Background Layer */
+        #cyber-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Overlay grid lines for depth */
+        .grid-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%), 
+                        linear-gradient(90deg, rgba(6, 182, 212, 0.03), rgba(0, 0, 0, 0), rgba(239, 68, 68, 0.03));
+            z-index: 10;
+            background-size: 100% 4px, 6px 100%;
+            pointer-events: none;
+        }
+
+        .hud-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            position: relative;
+            z-index: 20;
+        }
+
+        /* Command Mainframe Header */
+        header {
+            grid-column: 1 / -1;
+            background: var(--panel-bg);
+            border: 1px solid var(--neon-cyan);
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.25);
+            padding: 35px;
+            border-radius: 4px;
+            position: relative;
+            backdrop-filter: blur(12px);
+        }
+
+        header::before {
+            content: "OPERATIONAL_NODE // SAKTHIVEL_P_MAIN";
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: #030712;
+            padding: 0 12px;
+            font-size: 0.8rem;
+            color: var(--neon-cyan);
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .identity-cluster h1 {
+            font-size: 2.6rem;
+            letter-spacing: 3px;
+            color: var(--text-bright);
+            margin-bottom: 5px;
+            text-shadow: 0 0 10px rgba(255,255,255,0.1);
+        }
+
+        .identity-cluster .title-string {
+            font-size: 1.15rem;
+            color: var(--neon-cyan);
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .cert-ribbon {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .cert-tag {
+            font-size: 0.75rem;
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid var(--neon-cyan);
+            color: #e0f2fe;
+            padding: 4px 10px;
+            border-radius: 2px;
+        }
+
+        .cert-tag.premium {
+            background: rgba(16, 185, 129, 0.15);
+            border-color: var(--neon-green);
+            color: #a7f3d0;
+        }
+
+        .comms-array {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .comms-array a {
+            color: var(--text-bright);
+            text-decoration: none;
+            font-size: 0.85rem;
+            border: 1px solid var(--border-cyber);
+            padding: 6px 16px;
+            background: rgba(0,0,0,0.4);
+            transition: all 0.3s ease;
+        }
+
+        .comms-array a:hover {
+            border-color: var(--neon-cyan);
+            color: var(--neon-cyan);
+            box-shadow: 0 0 12px var(--border-glow);
+            transform: translateY(-1px);
+        }
+
+        /* Unified HUD System Panels */
+        .hud-panel {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-cyber);
+            padding: 24px;
+            border-radius: 4px;
+            backdrop-filter: blur(12px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hud-panel:hover {
+            border-color: rgba(6, 182, 212, 0.6);
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.1);
+        }
+
+        .hud-panel-wide {
+            grid-column: 1 / -1;
+        }
+
+        .panel-header {
+            font-size: 1.05rem;
+            font-weight: bold;
+            color: var(--neon-cyan);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-cyber);
+            padding-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            letter-spacing: 1px;
+        }
+
+        .panel-header i {
+            color: var(--neon-red);
+        }
+
+        /* Operational Data Grid Rows */
+        .data-stream-row {
+            display: flex;
+            border-bottom: 1px solid rgba(6, 182, 212, 0.1);
+            padding: 16px 0;
+        }
+
+        .data-stream-row:last-child { border-bottom: none; }
+
+        .stream-timestamp {
+            width: 150px;
+            flex-shrink: 0;
+            color: var(--neon-red);
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .stream-payload h3 {
+            font-size: 1.15rem;
+            color: var(--text-bright);
+            margin-bottom: 6px;
+        }
+
+        .stream-payload .entity-sub {
+            color: var(--neon-cyan);
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .stream-payload ul {
+            list-style: none;
+            margin-top: 8px;
+        }
+
+        .stream-payload ul li {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-bottom: 6px;
+            padding-left: 18px;
+            position: relative;
+        }
+
+        .stream-payload ul li::before {
+            content: "►";
+            position: absolute;
+            left: 0;
+            color: var(--neon-green);
+            font-size: 0.7rem;
+            top: 2px;
+        }
+
+        /* Matrix Capabilities Matrix */
+        .inventory-cluster {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 12px;
+        }
+
+        .inventory-node {
+            background: rgba(3, 7, 18, 0.6);
+            border: 1px solid rgba(6, 182, 212, 0.15);
+            padding: 10px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            border-radius: 2px;
+        }
+
+        .inventory-node.critical-node {
+            border-color: var(--neon-green);
+            color: var(--neon-green);
+            font-weight: bold;
+            background: rgba(16, 185, 129, 0.03);
+            box-shadow: inset 0 0 8px rgba(16, 185, 129, 0.05);
+        }
+
+        @media (max-width: 900px) {
+            .hud-container { grid-template-columns: 1fr; }
+            .data-stream-row { flex-direction: column; gap: 8px; }
+            .stream-timestamp { width: auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="grid-overlay"></div>
+
+    <canvas id="cyber-canvas"></canvas>
+
+    <div class="hud-container">
+        
+        <header>
+            <div class="identity-cluster">
+                <h1>SAKTHIVEL P</h1>
+                <div class="title-string">> NETWORK SECURITY ENGINEER // INFRASTRUCTURE HARDENING SPECIALIST</div>
+                
+                <div class="cert-ribbon">
+                    <span class="cert-tag premium"><i class="fas fa-trophy"></i> TryHackMe Guru (Top 2% Globally)</span>
+                    <span class="cert-tag">CNSP</span>
+                    <span class="cert-tag">CCEP</span>
+                    <span class="cert-tag">Google Cybersecurity Certified</span>
+                    <span class="cert-tag">OWASP Coimbatore Member</span>
+                </div>
+
+                <div class="comms-array">
+                    <a href="https://www.linkedin.com/in/sakthivel08/" target="_blank"><i class="fab fa-linkedin"></i> LINKEDIN_NODE</a>
+                    <a href="https://github.com/sakthivel-sec" target="_blank"><i class="fab fa-github"></i> GITHUB_VAULT</a>
+                    <a href="mailto:sakthivelcyber@gmail.com"><i class="fas fa-envelope"></i> COMMS_ROUTER</a>
+                </div>
+            </div>
+        </header>
+
+        <div class="hud-panel hud-panel-wide">
+            <div class="panel-header"><i class="fas fa-terminal"></i> core_capabilities_inventory</div>
+            <div class="inventory-cluster">
+                <div class="inventory-node critical-node">Fortinet</div>
+                <div class="inventory-node critical-node">Cisco </div>
+                <div class="inventory-node critical-node">Nmap</div>
+                <div class="inventory-node critical-node">Wireshark</div>
+                <div class="inventory-node critical-node">Network Security</div>
+                <div class="inventory-node">Endpoint Security</div>
+                <div class="inventory-node">Network Hardening</div>
+                <div class="inventory-node">Network Switches</div>
+                <div class="inventory-node">Linux OS</div>
+                <div class="inventory-node">Python</div>
+                <div class="inventory-node">Burp Suite</div>
+                <div class="inventory-node">Metasploit</div>
+                <div class="inventory-node">SQL Injection</div>
+                <div class="inventory-node">XSS Mitigation</div>
+            </div>
+        </div>
+
+        <div class="hud-panel">
+            <div class="panel-header"><i class="fas fa-shield-alt"></i> defensive_deployment_history</div>
+            
+            <div class="data-stream-row">
+                <div class="stream-timestamp">[2025 - PRESENT]</div>
+                <div class="stream-payload">
+                    <h3>Technical Associate</h3>
+                    <div class="entity-sub">VSecure Networks</div>
+                    <ul>
+                        <li>Delivering scalable network security solutions across enterprise environments and mid-market client bounds.</li>
+                        <li>Configured and orchestrated core enterprise firewalls and complex Cisco ISE validation policies to mitigate lateral threat threats.</li>
+                        <li>Deployed and maintained enterprise network switches, localized wireless access points, and complete endpoint defense stacks.</li>
+                        <li>Conducted routine security auditing, vulnerability mappings, and precise traffic forensics via Wireshark and Nmap configurations.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="data-stream-row">
+                <div class="stream-timestamp">[2024 - 2025]</div>
+                <div class="stream-payload">
+                    <h3>Technical Trainee</h3>
+                    <div class="entity-sub">VSecure Networks</div>
+                    <ul>
+                        <li>Completed an intensive 3-month physical infrastructure on-site hardware training programme.</li>
+                        <li>Provisioned real-world enterprise edge switches, wireless access controllers, and Fortinet endpoint client packages.</li>
+                        <li>Analyzed fundamental cloud computing frameworks alongside localized system hardening baselines.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="hud-panel">
+            <div class="panel-header"><i class="fas fa-skull-crossbones"></i> offensive_operations_ledger</div>
+            
+            <div class="data-stream-row">
+                <div class="stream-timestamp">TRYHACKME // GURU</div>
+                <div class="stream-payload">
+                    <h3>Penetration Testing Learner</h3>
+                    <div class="entity-sub">Self-Employed (Sustained 3+ Year Log)</div>
+                    <ul>
+                        <li>Ranked in the top 2% globally with extensive continuous challenges across 100+ virtual penetration labs.</li>
+                        <li>Completed targeted operations modules: Junior Penetration Tester, Web Fundamentals, SOC Level 1, and Red Teaming tracks.</li>
+                        <li>Validated security exploitation paths across SQL Injection, Cross-Site Scripting (XSS), and IDOR vulnerabilities via Burp Suite ecosystems.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="data-stream-row">
+                <div class="stream-timestamp">PROJ // SEC-IDS</div>
+                <div class="stream-payload">
+                    <h3>DoS Protection Tool</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-dim);">Engineered a specialized Python GUI tool layer capable of instantly automating Snort signature filters to isolate systems against high-velocity Denial of Service (DoS) conditions.</p>
+                </div>
+            </div>
+
+            <div class="data-stream-row">
+                <div class="stream-timestamp">PROJ // MAL-EVAL</div>
+                <div class="stream-payload">
+                    <h3>Advanced Keylogger Asset</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-dim);">Developed a modular Linux auditing tool mapping keyboard hooks via PYNPUT. Collects device hostnames, internal ARP structures, and localized configuration properties for ethical testing bounds.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="hud-panel">
+            <div class="panel-header"><i class="fas fa-database"></i> structural_education_registry</div>
+            
+            <div class="data-stream-row">
+                <div class="stream-timestamp">2021 - 2024</div>
+                <div class="stream-payload">
+                    <h3>Bachelor of Engineering // Computer Science</h3>
+                    <div class="entity-sub">Alagappa Chettiar College of Engineering & Technology (ACCET)</div>
+                    <p style="font-size: 0.85rem; color: var(--neon-green);">Performance Metrics: First-Class Standing // 7.4 CGPA</p>
+                </div>
+            </div>
+
+            <div class="data-stream-row">
+                <div class="stream-timestamp">2019 - 2021</div>
+                <div class="stream-payload">
+                    <h3>Diploma // Computer Engineering</h3>
+                    <div class="entity-sub">Egs Pillay Polytechnic College</div>
+                    <p style="font-size: 0.85rem; color: var(--neon-cyan);">Performance Metrics: 94% Cumulative Rating</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="hud-panel">
+            <div class="panel-header"><i class="fas fa-crosshairs"></i> command_leadership_records</div>
+            
+            <div class="data-stream-row">
+                <div class="stream-timestamp">NCC // CADET</div>
+                <div class="stream-payload">
+                    <h3>National Cadet Corps (India)</h3>
+                    <div class="entity-sub">Tactical & Leadership Training</div>
+                    <ul>
+                        <li><strong>C Certificate Verified:</strong> Attained with specialized Beta (B) Grade profile evaluation.</li>
+                        <li><strong>B Certificate Verified:</strong> Attained with elite Alpha (A) Grade qualification mark.</li>
+                        <li>Completed rigorous Advanced Leadership Camp (ALC) at Thiruvananthapuram, Kerala.</li>
+                        <li>Completed localized Basic Leadership Course (BLC) at Coimbatore camp sites.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const canvas = document.getElementById('cyber-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        // Nodes configuration for blue/red data threads
+        const nodes = [];
+        const maxNodes = 45;
+
+        for (let i = 0; i < maxNodes; i++) {
+            nodes.push({
+                x: Math.random() * window.innerWidth,
+                y: Math.random() * window.innerHeight,
+                vx: (Math.random() - 0.5) * 1.2,
+                vy: (Math.random() - 0.5) * 1.2,
+                size: Math.random() * 2 + 1,
+                color: Math.random() > 0.75 ? '#ef4444' : '#06b6d4'
+            });
+        }
+
+        // Padlock overlay mimicking user configuration constraints
+        let lockPulse = 0;
+
+        function animateCircuit() {
+            // Dark trace clear out
+            ctx.fillStyle = 'rgba(3, 7, 18, 0.08)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Draw data channels
+            ctx.lineWidth = 0.6;
+            for (let i = 0; i < nodes.length; i++) {
+                let n1 = nodes[i];
+                n1.x += n1.vx;
+                n1.y += n1.vy;
+
+                if (n1.x < 0 || n1.x > canvas.width) n1.vx *= -1;
+                if (n1.y < 0 || n1.y > canvas.height) n1.vy *= -1;
+
+                ctx.fillStyle = n1.color;
+                ctx.beginPath();
+                ctx.arc(n1.x, n1.y, n1.size, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Build circuit connection channels nearby
+                for (let j = i + 1; j < nodes.length; j++) {
+                    let n2 = nodes[j];
+                    let dist = Math.hypot(n1.x - n2.x, n1.y - n2.y);
+
+                    if (dist < 130) {
+                        ctx.strokeStyle = n1.color === '#ef4444' ? `rgba(239, 68, 68, ${0.15 - dist/130})` : `rgba(6, 182, 212, ${0.15 - dist/130})`;
+                        ctx.beginPath();
+                        ctx.moveTo(n1.x, n1.y);
+                        // Angular trace lookalike
+                        let midX = n1.x + (n2.x - n1.x) * 0.5;
+                        ctx.lineTo(midX, n1.y);
+                        ctx.lineTo(n2.x, n2.y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            // High-tech lock outline projection onto bottom right quadrant
+            lockPulse += 0.02;
+            const lockX = canvas.width - 240;
+            const lockY = canvas.height - 240;
+            
+            if(canvas.width > 800) {
+                ctx.save();
+                ctx.translate(lockX, lockY);
+                ctx.strokeStyle = `rgba(239, 68, 68, ${0.18 + Math.sin(lockPulse) * 0.05})`;
+                ctx.lineWidth = 2;
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = '#ef4444';
+
+                // Lock Shackle
+                ctx.beginPath();
+                ctx.arc(60, 40, 30, Math.PI, 0, false);
+                ctx.lineTo(90, 80);
+                ctx.lineTo(30, 80);
+                ctx.stroke();
+
+                // Lock Body
+                ctx.fillStyle = 'rgba(10, 15, 30, 0.6)';
+                ctx.fillRect(10, 70, 100, 80);
+                ctx.strokeRect(10, 70, 100, 80);
+
+                // Keyhole configuration
+                ctx.fillStyle = '#ef4444';
+                ctx.beginPath();
+                ctx.arc(60, 100, 8, 0, Math.PI * 2);
+                ctx.moveTo(60, 108);
+                ctx.lineTo(65, 125);
+                ctx.lineTo(55, 125);
+                ctx.closePath();
+                ctx.fill();
+
+                // Running data bits close proximity overlay
+                ctx.fillStyle = 'rgba(6, 182, 212, 0.4)';
+                ctx.font = '9px monospace';
+                ctx.fillText("STATUS: LOCKED", -10, 170);
+                ctx.fillText("SYS_INT: 100%", -10, 185);
+
+                ctx.restore();
+            }
+
+            requestAnimationFrame(animateCircuit);
+        }
+        animateCircuit();
+    </script>
+</body>
+</html>
